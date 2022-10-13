@@ -11,43 +11,12 @@ botCancelar.addEventListener('click',cancelar)
 
 
 //--------FUNCIONES NAVEGACIÓN---------------
-
-
-
-function guardaUsuarioJson(){
-/*     fetch("http://127.0.0.1:5500/json/usuariosRegistrados1 ", {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            title: 'Coderhouse',
-            body: 'Post de prueba',
-            userId: 1,
-        })
-    })
-    .then((response) => response.json())
-    .then((data) => console.log("Se agregó al JSON el usuario "+ data)) */
-
-    let user = {
-        nombre: 'Juan',
-        apellido: 'Perez'
-      };
-      
-      fetch('../json/usuariosRegistrados1.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(user)
-      })
-     .then((response) => console.log(response)) 
-//      let result = response.json();
-   //   alert(result.message);
-
+function aLogin(){
+    window.location.href='../login.html'
 }
 
-function aLogin(){
+
+function cargaExitosa(){
     Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -56,7 +25,7 @@ function aLogin(){
         timer: 50000
       })
       .then((result) => {
-        window.location.href='../login.html'
+        aLogin()
     } )
 }
 //--------FUNCIONES EN LOGIN---------------
@@ -127,7 +96,6 @@ function registraUsuario(usuarioIngresado,auxiliarArrayUsuarios){
     //auxiliarArrayUsuarios.push(usuarioNuevo)    
     let listaAuxiliar = [...auxiliarArrayUsuarios, ...usuarioNuevo] //SPREAD
     console.log("listaAuxiliar "+listaAuxiliar)
-    guardaUsuarioJson(usuarioNuevo[0])
     localStorage.setItem('usuariosRegistrados',JSON.stringify(listaAuxiliar))
 
     return 1 
@@ -152,6 +120,6 @@ function submit(){
     let auxiliarArrayUsuarios = JSON.parse(localStorage.getItem('usuariosRegistrados'))
     let validado = validacion(usuarioIngresado,auxiliarArrayUsuarios)
     validado == 0 ? reg = registraUsuario(usuarioIngresado,auxiliarArrayUsuarios) : console.log("El usuario ingresado ya existe")
-    reg == 1 && aLogin()
+    reg == 1 && cargaExitosa()
 
 }

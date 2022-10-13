@@ -14,14 +14,17 @@ inicializa()
 //--------FUNCIONES INICIALIZACIÓN---------------
 function inicializa(){
     let userRegistrados = JSON.parse(localStorage.getItem('usuariosRegistrados'))
-    if (userRegistrados != null){
+    if (userRegistrados == null){
         cargaUsuariosRegistrados()
     }
+    else{
+        login2()
+    }
+
     
 }
 // Cargo los usuarios desde JSON solo la primera vez que carga página.
 function cargaUsuariosRegistrados() {
-    console.log("Entra acá apenas actualiza")
     fetch(PATH_USUARIOS_REGISTRADOS)
     .then((respuesta) => respuesta.json())
     .then((respuesta) => {
@@ -39,7 +42,6 @@ function login2(){
         aHome()
     }
     else{
-        
         localStorage.removeItem('carrito')
     }
 }
